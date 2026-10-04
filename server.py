@@ -123,5 +123,11 @@ async def health(request):
     return JSONResponse({"status": "ok", "gnani_key_set": bool(API_KEY)})
 
 
+# ---- Kencase tools (DigiLocker, Account Aggregator, case state, KB, OCR,
+# ---- courier, slots). Lives in tools_kencase.py so the Gnani code above stays untouched.
+from tools_kencase import register_kencase_tools  # noqa: E402
+register_kencase_tools(mcp)
+
+
 if __name__ == "__main__":
     mcp.run(transport="streamable-http")  # MCP endpoint: /mcp
